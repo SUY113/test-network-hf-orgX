@@ -25,12 +25,12 @@ setGlobals() {
     USING_ORG="${OVERRIDE_ORG}"
   fi
   infoln "Using organization ${USING_ORG}"
-  if [ $USING_ORG -eq Staff ]; then
+  if [ $USING_ORG == "Staff" ]; then
     export CORE_PEER_LOCALMSPID="OrgStaffMSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORGStaff_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/orgStaff.example.com/users/Admin@orgStaff.example.com/msp
     export CORE_PEER_ADDRESS=localhost:7051
-  elif [ $USING_ORG -eq Accountant ]; then
+  elif [ $USING_ORG == "Accountant" ]; then
     export CORE_PEER_LOCALMSPID="OrgAccountantMSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORGAccountant_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/orgAccountant.example.com/users/Admin@orgAccountant.example.com/msp
@@ -60,9 +60,9 @@ setGlobalsCLI() {
   else
     USING_ORG="${OVERRIDE_ORG}"
   fi
-  if [ $USING_ORG -eq Staff ]; then
+  if [ $USING_ORG == "Staff" ]; then
     export CORE_PEER_ADDRESS=peer0.orgStaff.example.com:7051
-  elif [ $USING_ORG -eq Accountant ]; then
+  elif [ $USING_ORG == "Accountant" ]; then
     export CORE_PEER_ADDRESS=peer0.orgAccountant.example.com:9051
   elif [ $USING_ORG -eq 3 ]; then
     export CORE_PEER_ADDRESS=peer0.org3.example.com:11051
