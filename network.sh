@@ -162,7 +162,17 @@ function createOrgs() {
     if [ $res -ne 0 ]; then
       fatalln "Failed to generate certificates..."
     fi
+    
+    infoln "Creating OrgManager Identities"
 
+    set -x
+    cryptogen generate --config=./organizations/cryptogen/crypto-config-orgManager.yaml --output="organizations"
+    res=$?
+    { set +x; } 2>/dev/null
+    if [ $res -ne 0 ]; then
+      fatalln "Failed to generate certificates..."
+    fi
+    
     infoln "Creating Orderer Org Identities"
 
     set -x
@@ -200,13 +210,17 @@ function createOrgs() {
 
     createOrgAccountant
 
+    infoln "Creating OrgManager Identities"
+
+    createOrgManager
+
     infoln "Creating Orderer Org Identities"
 
     createOrderer
 
   fi
 
-  infoln "Generating CCP files for OrgStaff and OrgAccountant"
+  infoln "Generating CCP files for OrgStaff and OrgAccountant and OrgManager"
   ./organizations/ccp-generate.sh
 }
 

@@ -86,7 +86,7 @@ successln "Channel '$CHANNEL_NAME' created"
 ## Join all the peers to the channel
 infoln "Joining orgStaff peer to the channel..."
 joinChannel Staff
-infoln "Joining org2 peer to the channel..."
+infoln "Joining orgAccountant peer to the channel..."
 joinChannel Accountant
 
 ## Set the anchor peers for each org in the channel
@@ -94,5 +94,4 @@ infoln "Setting anchor peer for orgStaff..."
 setAnchorPeer Staff
 infoln "Setting anchor peer for orgAccountant..."
 setAnchorPeer Accountant
-
 successln "Channel '$CHANNEL_NAME' joined"

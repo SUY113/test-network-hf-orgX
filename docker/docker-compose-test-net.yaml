@@ -9,6 +9,7 @@ volumes:
   orderer.example.com:
   peer0.orgStaff.example.com:
   peer0.orgAccountant.example.com:
+  peer0.orgManager.example.com:
 
 networks:
   test:
@@ -124,7 +125,44 @@ services:
       - 9445:9445
     networks:
       - test
-
+      
+  peer0.orgManager.example.com:
+    container_name: peer0.orgManager.example.com
+    image: hyperledger/fabric-peer:latest
+    environment:
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric_test
+      - FABRIC_LOGGING_SPEC=INFO
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      # Peer specific variabes
+      - CORE_PEER_ID=peer0.orgManager.example.com
+      - CORE_PEER_ADDRESS=peer0.orgManager.example.com:21051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:21051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgManager.example.com:21052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:21052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgManager.example.com:21051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.orgManager.example.com:21051
+      - CORE_PEER_LOCALMSPID=OrgManagerMSP
+      - CORE_OPERATIONS_LISTENADDRESS=peer0.orgManager.example.com:21445
+    volumes:
+        - /var/run/docker.sock:/host/var/run/docker.sock
+        - ../organizations/peerOrganizations/orgManager.example.com/peers/peer0.orgManager.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../organizations/peerOrganizations/orgManager.example.com/peers/peer0.orgManager.example.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.orgManager.example.com:/var/hyperledger/production
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 21051:21051
+      - 21445:21445
+    networks:
+      - test
+   
   cli:
     container_name: cli
     image: hyperledger/fabric-tools:latest
@@ -144,5 +182,6 @@ services:
     depends_on:
       - peer0.orgStaff.example.com
       - peer0.orgAccountant.example.com
+      - peer0.orgManager.example.com
     networks:
       - test
