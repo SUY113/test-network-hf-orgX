@@ -4,6 +4,14 @@ You can use the `./network.sh` script to stand up a simple Fabric test network. 
 
 Before you can deploy the test network, you need to follow the instructions to [Install the Samples, Binaries and Docker Images](https://hyperledger-fabric.readthedocs.io/en/latest/install.html) in the Hyperledger Fabric documentation.
 
+<<<<<<< HEAD
 ## Phiên bản sửa đổi của Test-network thuộc về Fabric-sample.
 
 Sửa đổi các org mặc định của test network để phù với một dự án ứng dụng "TrustPay". Một dự án ứng dụng HF và EVMCC
+=======
+
+## Phiên bản sửa đổi của Test-network thuộc về Fabric-sample.
+
+Sửa đổi các org mặc định của test network để phù với một dự án ứng dụng "TrustPay". Một dự án ứng dụng HF và EVMCC
+
+>>>>>>> 1ced226 (Update Readme)
