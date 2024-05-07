@@ -348,7 +348,7 @@ Profiles:
             OrgStaffOrgStaff:
                 Organizations:
                     - *OrgStaff                       
-    TwoOrgsChannel:
+    TwoOrgsChannelStaffAccountant:
         Consortium: OrgStaffOrgAccountant
         <<: *ChannelDefaults
         Application:
@@ -358,6 +358,7 @@ Profiles:
                 - *OrgAccountant
             Capabilities:
                 <<: *ApplicationCapabilities
+    TwoOrgsChannelAccountantManager:
         Consortium: OrgAccountantOrgManager
         <<: *ChannelDefaults
         Application:
@@ -367,6 +368,7 @@ Profiles:
                 - *OrgManager
             Capabilities:
                 <<: *ApplicationCapabilities
+    TwoOrgsChannelStaffStaff:
         Consortium: OrgStaffOrgStaff
         <<: *ChannelDefaults
         Application:
